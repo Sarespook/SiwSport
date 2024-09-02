@@ -22,8 +22,7 @@ public class PresidenteController {
 	@Autowired
 	private PresidenteService presidenteService;
 	
-	@Autowired
-	private SquadraService squadraService;
+	
 	
 	
 //	@GetMapping("/user/index")
@@ -36,7 +35,7 @@ public class PresidenteController {
 	@GetMapping("/admin/scegliPresidentePerUnaSquadra")
 	public String scegliPresidente(Model model) {
 		model.addAttribute("userDetails", this.globalController.getUser());
-		model.addAttribute("presidenti", this.presidenteService.findAll());
+		model.addAttribute("presidenti", this.presidenteService.findAllWithoutSquad());
 		return "/admin/presidentiPerUnaSquadra.html";
 	}
 	
@@ -52,7 +51,7 @@ public class PresidenteController {
 	public String aggiungiPresidente(@PathVariable("presidenteId")Long presidenteId,Model model,RedirectAttributes redirectAttributes) {
 			model.addAttribute("userDetails", this.globalController.getUser());
 			Presidente presidente=this.presidenteService.findById(presidenteId);
-			model.addAttribute("squqdra",new Squadra());
+			model.addAttribute("squadra",new Squadra());
 			redirectAttributes.addFlashAttribute("presidente",presidente);
 			return "redirect:/admin/formNuovaSquadra.html";
 	}

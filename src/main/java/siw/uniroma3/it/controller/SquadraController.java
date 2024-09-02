@@ -13,9 +13,14 @@ import siw.uniroma3.it.model.Presidente;
 import siw.uniroma3.it.model.Squadra;
 import siw.uniroma3.it.service.PresidenteService;
 import siw.uniroma3.it.service.SquadraService;
+import siw.uniroma3.it.validation.SquadraValidator;
 
 @Controller
 public class SquadraController {
+	
+	
+	@Autowired
+	private SquadraValidator squadraValidator;
 	
 	
 	@Autowired
@@ -32,7 +37,7 @@ public class SquadraController {
 	@GetMapping("/admin/formNuovaSquadra")
 	public String getFormNuovaSquadra(Model model){
 		model.addAttribute("userDetails", this.globalController.getUser());
-		return "/admin/scegliPresidentePerUnaSquadra.html";
+		return "/admin/formNuovaSquadra.html";
 	}
 	
 	@PostMapping("/admin/squadra")
@@ -42,6 +47,22 @@ public class SquadraController {
 			,BindingResult presidenteBindingResult
 			,Model model){
 		
+		this.squadraValidator.validate(squadra, squadraBindingResult);
+		
+		if(squadraBindingResult.hasErrors()==false) {
+			/*anche qui , bisogna inserire la gestione del salvataggio e caricamento del logo della squadra*/
+			
+			squadra.setPresidente(presidente);
+			presidente.setSquadra(squadra);
+			
+			this.squadraService.save(squadra);
+			
+			model.addAttribute("squadra",squadra);
+			return "/admin/riepilogoInserimentoSquadra.html";
+		}
+		else {
+			return "redirect:/admin/formNuovaSquadra";
+		}
 	}
 
 }

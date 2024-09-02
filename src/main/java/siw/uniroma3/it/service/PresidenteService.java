@@ -1,5 +1,7 @@
 package siw.uniroma3.it.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,18 @@ public class PresidenteService {
 
 	public Presidente findById(Long presidenteId) {
 		return this.presidenteRepository.findById(presidenteId).get();
+	}
+
+	public Iterable<Presidente> findAllWithoutSquad() {
+		return this.presidenteRepository.findAllWithoutSquad();
+	}
+
+	public boolean existsByNomeCognomeDataDiNascitaLuogoDiNascita(String nome, String cognome, Date dataDiNascita
+			,String luogoDiNascita) {
+		return this.presidenteRepository.existsByNomeCognomeDataDiNascitaLuogoDiNascita(nome
+				,cognome
+				,dataDiNascita
+				,luogoDiNascita);
 	}
 
 }

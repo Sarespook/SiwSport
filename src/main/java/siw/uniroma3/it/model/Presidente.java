@@ -3,7 +3,6 @@ package siw.uniroma3.it.model;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,6 +36,15 @@ public class Presidente {
 	
 	@OneToOne
 	private Squadra squadra;
+	
+
+	public Squadra getSquadra() {
+		return squadra;
+	}
+
+	public void setSquadra(Squadra squadra) {
+		this.squadra = squadra;
+	}
 
 	public Long getId() {
 		return id;
