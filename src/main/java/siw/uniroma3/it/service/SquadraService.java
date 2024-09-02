@@ -20,4 +20,8 @@ public class SquadraService {
 		this.squadraRepository.save(squadra);
 	}
 
+	public boolean existsByName(String nome) {
+		return this.squadraRepository.existsByName(nome);
+	}
+
 }

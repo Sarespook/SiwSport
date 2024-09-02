@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -27,6 +26,8 @@ public class TesseratoController {
 
 	@Autowired
 	private SquadraService squadraService;
+	
+	
 	
 	@GetMapping("/user/aggiungiNuovoTesserato/{squadraId}")
 	public String scegliGiocatore(@PathVariable("squadraId")Long squadraId,Model model) {
@@ -62,7 +63,7 @@ public class TesseratoController {
 		this.giocatoreService.save(giocatore);
 		this.squadraService.save(squadra);
 		
-		return "redirect:/user/index";
+		return "redirect:/user/scegliGiocatoreComeTesserato.html";
 	}
 	
 	

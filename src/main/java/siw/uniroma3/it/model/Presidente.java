@@ -35,7 +35,7 @@ public class Presidente {
 	@NotBlank
 	private String cognome;
 	
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne
 	private Squadra squadra;
 
 	public Long getId() {

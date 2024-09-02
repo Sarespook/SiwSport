@@ -24,7 +24,9 @@ public class Squadra {
 	@NotBlank
 	private Long indirizzoSede;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private String urlLogo;
+	
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Presidente presidente;
 	
 	@OneToMany(cascade=CascadeType.ALL)
@@ -61,7 +63,15 @@ public class Squadra {
 	public void setIndirizzoSede(Long indirizzoSede) {
 		this.indirizzoSede = indirizzoSede;
 	}
-
+	
+	public String getUrlLogo() {
+			return urlLogo;
+		}
+	
+	public void setUrlLogo(String urlLogo) {
+			this.urlLogo = urlLogo;
+		}
+	
 	public Presidente getPresidente() {
 		return presidente;
 	}
@@ -96,6 +106,8 @@ public class Squadra {
 				&& Objects.equals(indirizzoSede, other.indirizzoSede) && Objects.equals(nome, other.nome)
 				&& Objects.equals(presidente, other.presidente) && Objects.equals(tesserati, other.tesserati);
 	}
+
+	
 	
 	
 	
