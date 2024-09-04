@@ -27,8 +27,8 @@ public class GiocatoreValidator implements Validator {
 				giocatore.getLuogoDiNascita()!=null) {
 			boolean duplicato=this.giocatoreService.existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(giocatore.getNome()
 					,giocatore.getCognome()
-					,giocatore.getLuogoDiNascita()
-					,giocatore.getDataDiNascita());
+					,giocatore.getDataDiNascita()
+					,giocatore.getLuogoDiNascita());
 			if(duplicato) {
 				errors.reject("giocatore.duplicate");
 			}

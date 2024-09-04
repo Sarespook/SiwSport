@@ -26,9 +26,9 @@ public class PresidenteService {
 		return this.presidenteRepository.findAllWithoutSquad();
 	}
 
-	public boolean existsByNomeCognomeDataDiNascitaLuogoDiNascita(String nome, String cognome, Date dataDiNascita
+	public boolean existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(String nome, String cognome, Date dataDiNascita
 			,String luogoDiNascita) {
-		return this.presidenteRepository.existsByNomeCognomeDataDiNascitaLuogoDiNascita(nome
+		return this.presidenteRepository.existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(nome
 				,cognome
 				,dataDiNascita
 				,luogoDiNascita);

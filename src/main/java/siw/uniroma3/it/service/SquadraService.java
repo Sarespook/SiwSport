@@ -20,8 +20,8 @@ public class SquadraService {
 		this.squadraRepository.save(squadra);
 	}
 
-	public boolean existsByName(String nome) {
-		return this.squadraRepository.existsByName(nome);
+	public boolean existsByNome(String nome) {
+		return this.squadraRepository.existsByNome(nome);
 	}
 
 	public Iterable<Squadra> findAll() {

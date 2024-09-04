@@ -24,7 +24,7 @@ public class SquadraValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Squadra squadra=(Squadra) target;
 		
-		if(squadra.getNome()!= null && this.squadraService.existsByName(squadra.getNome())){
+		if(squadra.getNome()!= null && this.squadraService.existsByNome(squadra.getNome())){
 				errors.reject("squadra.duplicate");
 			}
 		}

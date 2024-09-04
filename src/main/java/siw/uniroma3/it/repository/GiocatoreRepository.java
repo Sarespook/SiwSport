@@ -10,7 +10,7 @@ public interface GiocatoreRepository extends CrudRepository<Giocatore, Long> {
 
 	public boolean existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(String Nome
 			,String Cognome
-			,String LuogoDiNascita
-			,Date dataDiNascita);
+			,Date dataDiNascita
+			,String LuogoDiNascita);
 
 }

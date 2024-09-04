@@ -32,6 +32,7 @@ public class User {
 	@NotBlank
 	private String address;
 	
+
 	@OneToOne(cascade= {CascadeType.ALL},fetch=FetchType.EAGER)
 	private Presidente presidente;
 
@@ -67,6 +68,14 @@ public class User {
 		this.address = address;
 	}
 
+	public Presidente getPresidente() {
+		return presidente;
+	}
+
+	public void setPresidente(Presidente presidente) {
+		this.presidente = presidente;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, email, name, presidente, surname);

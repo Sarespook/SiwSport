@@ -24,12 +24,12 @@ public class GiocatoreService {
 
 	public boolean existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(String Nome
 			,String Cognome
-			,String LuogoDiNascita
-			,Date DataDiNascita) {
+			,Date DataDiNascita
+			,String LuogoDiNascita) {
 		return this.giocatoreRepository.existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(Nome
 				,Cognome
-				,LuogoDiNascita
-				,DataDiNascita);
+				,DataDiNascita
+				,LuogoDiNascita);
 	}
 
 	public Giocatore findById(Long giocatoreId) {

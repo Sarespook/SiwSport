@@ -14,7 +14,7 @@ public interface PresidenteRepository extends CrudRepository<Presidente, Long> {
 	        + "WHERE p.squadraId IS NULL ", nativeQuery=true)
 	Iterable<Presidente> findAllWithoutSquad();
 
-	boolean existsByNomeCognomeDataDiNascitaLuogoDiNascita(String nome, String cognome, Date dataDiNascita,
+	boolean existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(String nome, String cognome, Date dataDiNascita,
 			String luogoDiNascita);
 
 }

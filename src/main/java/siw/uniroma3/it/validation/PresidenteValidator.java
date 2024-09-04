@@ -28,7 +28,7 @@ public class PresidenteValidator implements Validator{
 		
 		if(presidente.getNome()!=null && presidente.getCognome()!=null
 				&& presidente.getDataDiNascita()!=null && presidente.getLuogoDiNascita()!=null) {
-			boolean duplicato=this.presidenteService.existsByNomeCognomeDataDiNascitaLuogoDiNascita(
+			boolean duplicato=this.presidenteService.existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(
 					presidente.getNome()
 					,presidente.getCognome()
 					,presidente.getDataDiNascita()

@@ -6,6 +6,6 @@ import siw.uniroma3.it.model.Squadra;
 
 public interface SquadraRepository extends CrudRepository<Squadra, Long> {
 
-	boolean existsByName(String nome);
+	boolean existsByNome(String nome);
 
 }
