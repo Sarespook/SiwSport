@@ -24,4 +24,8 @@ public class SquadraService {
 		return this.squadraRepository.existsByName(nome);
 	}
 
+	public Iterable<Squadra> findAll() {
+		return this.squadraRepository.findAll();
+	}
+
 }

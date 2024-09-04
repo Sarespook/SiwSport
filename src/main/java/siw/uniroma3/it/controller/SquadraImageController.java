@@ -1,4 +1,5 @@
 package siw.uniroma3.it.controller;
+
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -15,10 +16,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @RestController
-@RequestMapping("/images")
-public class ImageController {
+@RequestMapping("/SquadraImages")
+public class SquadraImageController {
 	
-	 private final String uploadDir = "C:/Users/hp/Siw_Workspace/SiwSport/images";
+	 private final String uploadDir = "C:/Users/hp/Siw_Workspace/SiwSport/SquadraImages";
 	 
 	 @GetMapping("/{filename}")
 	    public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {
@@ -36,5 +37,5 @@ public class ImageController {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	        }
 	    }
-
+	 
 }

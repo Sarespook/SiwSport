@@ -27,7 +27,8 @@ public class TesseratoController {
 	@Autowired
 	private SquadraService squadraService;
 	
-	
+	/*Logica implementativa per l'aggiunta di un tesserato in una squadra , da parte del presidente
+	 * Della Squadra*/
 	
 	@GetMapping("/user/aggiungiNuovoTesserato/{squadraId}")
 	public String scegliGiocatore(@PathVariable("squadraId")Long squadraId,Model model) {
@@ -65,6 +66,10 @@ public class TesseratoController {
 		
 		return "redirect:/user/scegliGiocatoreComeTesserato.html";
 	}
+	
+	
+/*-------------------------------------------------------------------------------------------------
+ *--------------------------------------------------------------------------------------------------*/
 	
 	
 	

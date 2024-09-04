@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -27,9 +29,11 @@ public class Tesserato {
 	
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "squadra_id", nullable = false)
 	private Squadra squadra;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "giocatore_id", nullable = false)
 	private Giocatore giocatore;
 
 	public Long getId() {
