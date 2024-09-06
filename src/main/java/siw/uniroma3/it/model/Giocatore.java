@@ -27,13 +27,18 @@ public class Giocatore {
 	@NotBlank
 	private String luogoDiNascita;
 	
+	private String urlImage;
+	
 	@NotBlank
 	private String nome;
 	
 	@NotBlank
 	private String cognome;
 	
-	@OneToMany()
+	
+	private boolean selezionato=false;
+	
+	@OneToMany
 	private List<Tesserato> tesseramenti;
 
 	public Long getId() {
@@ -67,7 +72,14 @@ public class Giocatore {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public String getUrlImage() {
+			return urlImage;
+		}
+	
+	public void setUrlImage(String urlImage) {
+			this.urlImage = urlImage;
+		}
+	
 	public String getCognome() {
 		return cognome;
 	}
@@ -102,6 +114,16 @@ public class Giocatore {
 				&& Objects.equals(luogoDiNascita, other.luogoDiNascita) && Objects.equals(nome, other.nome)
 				&& Objects.equals(tesseramenti, other.tesseramenti);
 	}
+
+	public boolean isSelezionato() {
+		return selezionato;
+	}
+
+	public void setSelezionato(boolean selezionato) {
+		this.selezionato = selezionato;
+	}
+
+	
 	
 	
 

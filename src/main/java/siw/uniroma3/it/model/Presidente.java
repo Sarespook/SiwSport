@@ -22,10 +22,13 @@ public class Presidente {
 	@NotNull
 	private String cf;
 	
-	@NotNull
+	
+	private String urlImage;
+	
+	
 	private Date dataDiNascita;
 	
-	@NotBlank
+	
 	private String luogoDiNascita;
 	
 	@NotBlank
@@ -56,6 +59,15 @@ public class Presidente {
 
 	public String getCf() {
 		return cf;
+	}
+	
+	
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	public void setCf(String cf) {
@@ -112,6 +124,8 @@ public class Presidente {
 				&& Objects.equals(dataDiNascita, other.dataDiNascita)
 				&& Objects.equals(luogoDiNascita, other.luogoDiNascita) && Objects.equals(nome, other.nome);
 	}
+
+	
 
 	
 
