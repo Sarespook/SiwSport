@@ -1,5 +1,6 @@
 package siw.uniroma3.it.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -19,11 +20,13 @@ import java.nio.file.Paths;
 @RequestMapping("/SquadraImages")
 public class SquadraImageController {
 	
-	 private final String uploadDir = "C:/Users/hp/Siw_Workspace/SiwSport/SquadraImages";
+	@Value("${upload.path-Squadra}")
+    private String uploadPath;
+	
 	 
 	 @GetMapping("/{filename}")
 	    public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {
-	        File file = new File(Paths.get(uploadDir, filename).toString());
+	        File file = new File(Paths.get(uploadPath, filename).toString());
 	        if (file.exists()) {
 	            Resource resource = new FileSystemResource(file);
 	            String contentType = Files.probeContentType(file.toPath());

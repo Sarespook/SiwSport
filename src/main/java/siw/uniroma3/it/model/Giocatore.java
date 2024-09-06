@@ -35,6 +35,9 @@ public class Giocatore {
 	@NotBlank
 	private String cognome;
 	
+	
+	private boolean selezionato=false;
+	
 	@OneToMany()
 	private List<Tesserato> tesseramenti;
 
@@ -110,6 +113,14 @@ public class Giocatore {
 		return Objects.equals(cognome, other.cognome) && Objects.equals(dataDiNascita, other.dataDiNascita)
 				&& Objects.equals(luogoDiNascita, other.luogoDiNascita) && Objects.equals(nome, other.nome)
 				&& Objects.equals(tesseramenti, other.tesseramenti);
+	}
+
+	public boolean isSelezionato() {
+		return selezionato;
+	}
+
+	public void setSelezionato(boolean selezionato) {
+		this.selezionato = selezionato;
 	}
 
 	

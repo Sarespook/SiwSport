@@ -10,8 +10,8 @@ import siw.uniroma3.it.model.Presidente;
 public interface PresidenteRepository extends CrudRepository<Presidente, Long> {
 
 	@Query(value="SELECT * "
-	        + "FROM Presidente "
-	        + "WHERE p.squadraId IS NULL ", nativeQuery=true)
+	        + "FROM presidente p"
+	        + "WHERE p.squadra_id IS NULL ", nativeQuery=true)
 	Iterable<Presidente> findAllWithoutSquad();
 
 	boolean existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(String nome, String cognome, Date dataDiNascita,

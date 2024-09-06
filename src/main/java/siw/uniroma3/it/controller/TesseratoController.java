@@ -14,6 +14,7 @@ import siw.uniroma3.it.model.Squadra;
 import siw.uniroma3.it.model.Tesserato;
 import siw.uniroma3.it.service.GiocatoreService;
 import siw.uniroma3.it.service.SquadraService;
+import siw.uniroma3.it.service.TesseratoService;
 
 @Controller
 public class TesseratoController {
@@ -25,6 +26,9 @@ public class TesseratoController {
 	private GiocatoreService giocatoreService;
 
 	@Autowired
+	private TesseratoService tesseratoService;
+	
+	@Autowired
 	private SquadraService squadraService;
 	
 	/*Logica implementativa per l'aggiunta di un tesserato in una squadra , da parte del presidente
@@ -33,7 +37,7 @@ public class TesseratoController {
 	@GetMapping("/user/aggiungiNuovoTesserato/{squadraId}")
 	public String scegliGiocatore(@PathVariable("squadraId")Long squadraId,Model model) {
 		model.addAttribute("userDetails", this.globalController.getUser());
-		model.addAttribute("giocatori", this.giocatoreService.findAll());
+		model.addAttribute("giocatori", this.giocatoreService.findAllNotSelected());
 		model.addAttribute("squadra", this.squadraService.findById(squadraId));
 		return "/user/scegliGiocatoreComeTesserato.html";
 	}
@@ -58,6 +62,7 @@ public class TesseratoController {
 		tesserato.setGiocatore(giocatore);
 		tesserato.setDataInizioTesseramento(new Date());
 		
+		giocatore.setSelezionato(true);    //forse questa verifica logica , rende superfluo il unique constraint
 		giocatore.getTesseramenti().add(tesserato);
 		squadra.getTesserati().add(tesserato);
 		
@@ -71,7 +76,44 @@ public class TesseratoController {
 /*-------------------------------------------------------------------------------------------------
  *--------------------------------------------------------------------------------------------------*/
 	
+	@GetMapping("/user/scegliTesseratoDaEliminare/{squadraId}")
+	public String scegliGiocatoreDaEliminare(@PathVariable("squadraId")Long squadraId,Model model) {
+		model.addAttribute("userDetails",this.globalController.getUser());
+		model.addAttribute("giocatori", this.giocatoreService.findAllSelected());
+		model.addAttribute("squadra",this.squadraService.findById(squadraId));
+		return "/user/scegliTesseratoDaEliminare.html";
+	}
 	
 	
+	@GetMapping("/user/scegliTesseratoDaEliminare/{squadraId}/{giocatoreId")
+	public String confermaGiocatoreDaEliminare(@PathVariable("squadraId")Long squadraId
+			,@PathVariable("giocatoreId")Long giocatoreId
+			,Model model) {
+		model.addAttribute("userDetails", this.globalController.getUser());
+		model.addAttribute("giocatore", this.giocatoreService.findById(giocatoreId));
+		model.addAttribute("squadraId", this.squadraService.findById(squadraId));
+		return "/user/confermaTesseratoDaEliminare.html";
+	}
+	
+	
+	@GetMapping("/user/eliminaGiocatore/{squadraId}/{giocatoreId}")
+	public String eliminaGiocatore(@PathVariable("squadraId")Long squadraId
+			,@PathVariable("giocatoreId")Long giocatoreId
+			,Model model) {
+		Tesserato tesserato = this.tesseratoService.findGiocatoreBySquadraToCancel(giocatoreId , squadraId);
+		Giocatore giocatore= this.giocatoreService.findById(giocatoreId);
+		Squadra squadra=this.squadraService.findById(squadraId);
+		
+		tesserato.setDataFineTesseramento(new Date());
+		
+		giocatore.setSelezionato(false);
+		
+		squadra.getTesserati().remove(tesserato);
+		
+		this.giocatoreService.save(giocatore);
+		this.squadraService.save(squadra);
+		
+		return "redirect:/user/scegliTesseratoDaEliminare.html";
+	}
 
 }

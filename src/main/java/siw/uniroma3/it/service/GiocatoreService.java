@@ -35,6 +35,14 @@ public class GiocatoreService {
 	public Giocatore findById(Long giocatoreId) {
 		return this.giocatoreRepository.findById(giocatoreId).get();
 	}
+
+	public Iterable<Giocatore> findAllNotSelected() {
+		return this.giocatoreRepository.findAllNotSelected();
+	}
+
+	public Iterable<Giocatore> findAllSelected() {
+		return this.giocatoreRepository.findAllSelected();
+	}
 	
 	
 	

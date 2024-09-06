@@ -35,7 +35,6 @@ public class SquadraController {
 	@Autowired
 	private SquadraValidator squadraValidator;
 	
-	
 	@Autowired
 	private GlobalController globalController;
 	

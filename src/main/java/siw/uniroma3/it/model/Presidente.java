@@ -24,10 +24,10 @@ public class Presidente {
 	
 	private String urlImage;
 	
-	@NotNull
+	
 	private Date dataDiNascita;
 	
-	@NotBlank
+	
 	private String luogoDiNascita;
 	
 	@NotBlank

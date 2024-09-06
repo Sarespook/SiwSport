@@ -14,9 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 import static siw.uniroma3.it.model.Credentials.ADMIN_ROLE;
-import static siw.uniroma3.it.model.Credentials.DEFAULT_ROLE;
 
 import javax.sql.DataSource;
 
@@ -47,41 +45,39 @@ import javax.sql.DataSource;
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean
+    @SuppressWarnings("removal")
+	@Bean
     protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception{
         httpSecurity
-                .csrf(withDefaults()).cors(cors -> cors.disable())
-                .authorizeHttpRequests(requests -> requests
+                .csrf().and().cors().disable()
+                .authorizeHttpRequests()
 //                .requestMatchers("/**").permitAll()
-                        // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
-                        .requestMatchers(HttpMethod.GET, "/", "/login", "/register", "/GiocatoreImages/**", "/css/**"
-                        , "/SquadraImages/**"
-                        , "/PresidenteImages/**")
-                        .permitAll()
-                        // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
-                        .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority(DEFAULT_ROLE)
-                        .requestMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority(DEFAULT_ROLE)
-                        .requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-                        .requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-                        // tutti gli utenti autenticati possono accere alle pagine rimanenti 
-                        .anyRequest().authenticated()).formLogin(login -> login
+                // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
+                .requestMatchers(HttpMethod.GET,"/","/login","/register","/images/**","/css/**")
+                								.permitAll()
+        		// chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
+                .requestMatchers(HttpMethod.POST,"/register", "/login").permitAll()
+                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
+        		// tutti gli utenti autenticati possono accere alle pagine rimanenti 
+                .anyRequest().authenticated()
+                // LOGIN: qui definiamo il login
+                .and().formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/success", true)
-                .failureUrl("/login?error=true"))
-                .oauth2Login(login -> login // Enable OAuth2 login
-                        .loginPage("/login") // Custom login page
-                        .defaultSuccessUrl("/success", true))
-                .logout(logout -> logout
-                        // il logout è attivato con una richiesta GET a "/logout"
-                        .logoutUrl("/logout")
-                        // in caso di successo, si viene reindirizzati alla home
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .clearAuthentication(true).permitAll());
+                .failureUrl("/login?error=true")
+                // LOGOUT: qui definiamo il logout
+                .and()
+                .logout()
+                // il logout è attivato con una richiesta GET a "/logout"
+                .logoutUrl("/logout")
+                // in caso di successo, si viene reindirizzati alla home
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .clearAuthentication(true).permitAll();
         return httpSecurity.build();
     }
 }
