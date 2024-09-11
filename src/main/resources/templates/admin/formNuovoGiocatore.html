@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuova Squadra</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/">Homepage</a>
+        <a href="/login">Login</a>
+		<a href="/logout">Logout</a>
+        <a href="/squadre">Squadre</a>
+    </div>
+
+	<div class="login-box">
+	    <h2>Inserisci Nuovo Giocatore</h2>
+	    <form th:action="@{/admin/giocatore}" method="POST" enctype="multipart/form-data">
+			
+          
+            <div class="input-group">
+                <label for="nome">Nome:</label>
+                <input id="nome" name="giocatore.nome" type="text" placeholder="Nome Giocatore" required th:field="${giocatore.nome}" />
+                <span th:if="${#fields.hasErrors('giocatore.nome')}" th:errors="${giocatore.nome}" class="error-message"></span>
+            </div>
+			
+			<div class="input-group">
+				<label for="cognome">Cognome:</label>
+				<input id="cognome" name="giocatore.cognome" type="text" placeholder="Cognome Giocatore" required th:field="${giocatore.cognome}" />
+				<span th:if="${#fields.hasErrors('giocatore.cognome')}" th:errors="${giocatore.cognome}" class="error-message"></span>
+			</div>
+
+            <div class="input-group">
+                <label for="dataDiNascita">Data di nascita:</label>
+                <input id="dataDiNascita" name="giocatore.dataDiNascita" type="date" placeholder="Data di Nascita" required th:field="${giocatore.dataDiNascita}" />
+                <span th:if="${#fields.hasErrors('giocatore.dataDiNascita')}" th:errors="${giocatore.dataDiNascita}" class="error-message"></span>
+            </div>
+
+			
+			<div class="input-group">
+				<label for="luogoDiNascita">Luogo di Nacita:</label>
+				<input id="luogoDiNascita" name="giocatore.luogoDiNascita" type="text" placeholder="luogoDiNascita" required th:field="${giocatore.luogoDiNascita}" />
+				<span th:if="${#fields.hasErrors('giocatore.luogoDiNascita')}" th:errors="${giocatore.luogoDiNascita}" class="error-message"></span>
+			</div>
+						
+
+            <div class="input-group">
+                <label for="image">Immagine giocatore:</label>
+                <input id="image" name="image" type="file" accept="image/png, image/jpeg"/>
+            </div>
+
+            <button type="submit" class="btn">Aggiungi Giocatore</button>
+        </form>
+    </div>
+
+</body>
+</html>

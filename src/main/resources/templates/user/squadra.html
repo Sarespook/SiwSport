@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Squadra</title>
+	<link rel="stylesheet" href="/css/user/squadra.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="container">
+        <!-- Team Info Container -->
+        <div class="team-info">
+            <div class="details">
+                <h2 th:text="${squadra.nome}"></h2>
+              	<p>Anno di Fondazione: <span th:text="${squadra.annoFondazione}"></span></p>
+                <p>Presidente: <span th:text="${presidente.nome}+' '+${presidente.cognome}"></span></p>
+                <!-- Aggiungi altre informazioni qui -->
+            </div>
+            <div class="logo">
+                <img th:src="@{${squadra.urlLogo}}" alt="Logo Squadra">
+            </div>
+        </div>
+
+        <!-- Players List Container -->
+        <div class="players-list">
+            <div class="player" th:each="tesserato : ${tesserati}">
+                <div class="name"><span th:text="${tesserato.nome}+' '+${tesserato.cognome}"></span></div>
+                <div class="date"><span th:text="${#dates.format(tesserato.dataInizioTesseramento, 'dd/MM/yyyy')}"></span></div>
+                <div class="actions">
+                    <a th:href="@{'/user/eliminaGiocatore/'+${tesserato.id}}">Rimuovi</a>
+                </div>
+            </div>
+            <!-- Aggiungi altri giocatori qui -->
+        </div>
+        
+        <!-- Add Player Button -->
+        <div class="add-player">
+            <a th:href="@{'/user/aggiungiNuovoTesserato'+'/'+${squadra.id}}">Aggiungi Giocatore</a>
+        </div>
+    </div>
+</body>
+</html>

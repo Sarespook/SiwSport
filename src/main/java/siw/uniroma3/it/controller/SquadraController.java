@@ -51,6 +51,16 @@ public class SquadraController {
 		return "squadra.html";
 	}
 	
+	@GetMapping("/user/squadra/{squadraId}")
+	public String getSquadraPresidente(@PathVariable("squadraId")Long squadraId,Model model) {
+		model.addAttribute("userDetails", this.globalController.getUser());
+		Squadra squadra = this.squadraService.findById(squadraId);
+		model.addAttribute("squadra",squadra);
+		model.addAttribute("tesserati",squadra.getTesserati());
+		model.addAttribute("presidente",squadra.getPresidente());
+		return "/user/squadra.html";
+	}
+	
 	@GetMapping("/squadre")
 	public String getSquadre(Model model) {
 		model.addAttribute("userDetails", this.globalController.getUser());
@@ -61,17 +71,18 @@ public class SquadraController {
 	
 	/*---------------------Logica inserimento nuova squadra---------------------------------*/
 	
-	@GetMapping("/admin/formNuovaSquadra")
-	public String getFormNuovaSquadra(Model model){
+	@GetMapping("/admin/formNuovaSquadra/{presidenteId}")
+	public String getFormNuovaSquadra(@PathVariable("presidenteId")Long presidenteId,Model model){
 		model.addAttribute("userDetails", this.globalController.getUser());
+		model.addAttribute("squadra", new Squadra());
+		model.addAttribute("presidente", this.presidenteService.findById(presidenteId));
 		return "/admin/formNuovaSquadra.html";
 	}
 	
-	@PostMapping("/admin/squadra")
+	@PostMapping("/squadra/{presidenteId}")
 	public String nuovaSquadra(@Valid@ModelAttribute("squadra")Squadra squadra
-			,@Valid@ModelAttribute("presidente")Presidente presidente
+			,@PathVariable("presidenteId")Long presidenteId
 			,BindingResult squadraBindingResult
-			,BindingResult presidenteBindingResult
 			,@RequestParam("image") MultipartFile imageFile
 			,Model model)throws IOException {
 		
@@ -88,13 +99,16 @@ public class SquadraController {
                 imageFile.transferTo(imagePath.toFile());
 
                 // Set the URL to the image in the animal entity
-                squadra.setUrlLogo("/images/" + filename); // URL mapped to the dynamic endpoint
+                squadra.setUrlLogo("/SquadraImages/" + filename); // URL mapped to the dynamic endpoint
             }
+			
+			Presidente presidente=this.presidenteService.findById(presidenteId);
 			
 			squadra.setPresidente(presidente);
 			presidente.setSquadra(squadra);
 			
 			this.squadraService.save(squadra);
+			
 			
 			model.addAttribute("squadra",squadra);
 			return "/admin/riepilogoInserimentoSquadra.html";

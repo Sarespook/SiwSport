@@ -34,4 +34,8 @@ public class PresidenteService {
 				,luogoDiNascita);
 	}
 
+	public void save(Presidente presidente) {
+		this.presidenteRepository.save(presidente);
+	}
+
 }

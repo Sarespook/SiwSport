@@ -40,8 +40,8 @@ public class GiocatoreService {
 		return this.giocatoreRepository.findAllNotSelected();
 	}
 
-	public Iterable<Giocatore> findAllSelected() {
-		return this.giocatoreRepository.findAllSelected();
+	public Iterable<Giocatore> findAllSelectedBySquadra(Long squadraId) {
+		return this.giocatoreRepository.findAllSelectedBySquadra(squadraId);
 	}
 	
 	

@@ -1,0 +1,96 @@
+/* Stile generale per l'immagine di sfondo */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Navbar in alto con elementi a sinistra */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px; /* Arrotonda solo il bordo inferiore */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 20px; /* Arrotonda gli angoli degli elementi */
+    margin: 0 5px; /* Spazio tra gli elementi */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Contenitore principale per i presidenti */
+.presidenti-container {
+    padding: 20px;
+}
+
+.presidenti-container h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Lista dei presidenti */
+.presidenti-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Centra gli elementi orizzontalmente */
+}
+
+/* Singolo elemento presidente */
+.presidente-item {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 600px; /* Imposta una larghezza massima per gli elementi */
+    position: relative; /* Necessario per il posizionamento del testo */
+    text-align: center;
+}
+
+.presidente-item img {
+      width: 50px; /* Riduci la dimensione del logo */
+    height: 50px; /* Assicura che l'altezza sia uguale alla larghezza */
+    border-radius: 10px; /* Arrotonda i bordi dell'icona del logo */
+    border: 2px solid #fff; /* Aggiungi un bordo bianco per evidenziare il logo */
+    padding: 5px; /* Spazio interno per creare un effetto di cuscinetto */
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); /* Effetto ombra sul logo */
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro dietro l'icona */
+    z-index: 3; /* Il logo rimane sopra tutto */
+}
+
+.presidente-item p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Effetto hover per l'elemento presidente */
+.presidente-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.presidente-item:hover p {
+    color: white; /* Il testo cambia contrasto */
+    transition: color 0.3s ease-in-out;
+}
+

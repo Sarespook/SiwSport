@@ -21,14 +21,10 @@ public class PresidenteController {
 	private PresidenteService presidenteService;
 	
 	
-	
-	
 //	@GetMapping("/user/index")
 //	public String indexPresidente(Model model) {
 //		
 //	}
-	
-	
 	
 	@GetMapping("/admin/scegliPresidentePerUnaSquadra")
 	public String scegliPresidente(Model model) {
@@ -48,10 +44,9 @@ public class PresidenteController {
 	@GetMapping("/admin/confermaPresidentePerUnaSquadra/{presidenteId}")
 	public String aggiungiPresidente(@PathVariable("presidenteId")Long presidenteId,Model model,RedirectAttributes redirectAttributes) {
 			model.addAttribute("userDetails", this.globalController.getUser());
-			Presidente presidente=this.presidenteService.findById(presidenteId);
 			model.addAttribute("squadra",new Squadra());
-			redirectAttributes.addFlashAttribute("presidente",presidente);
-			return "redirect:/admin/formNuovaSquadra.html";
+			model.addAttribute("presidente",this.presidenteService.findById(presidenteId));
+			return "/admin/formNuovaSquadra.html";
 	}
 	
 }

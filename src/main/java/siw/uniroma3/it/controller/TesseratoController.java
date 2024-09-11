@@ -1,6 +1,8 @@
 package siw.uniroma3.it.controller;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,22 +44,27 @@ public class TesseratoController {
 		return "/user/scegliGiocatoreComeTesserato.html";
 	}
 	
-	@GetMapping("/user/aggiungiNuovoTesserato/{squadraId}/{giocatoreId}")
-	public String ScegliNuovoTesserato(@PathVariable("squadraId")Long squadraId,@PathVariable("giocatoreId")Long giocatoreId
-			,Model model) {
-		model.addAttribute("userDetails", this.globalController.getUser());
-		model.addAttribute("giocatore",this.giocatoreService.findById(giocatoreId));
-		model.addAttribute("squadra", this.squadraService.findById(squadraId));   
-		return "/user/richiestaConfermaNuovoTesserato.html";
-	}
+//	@GetMapping("/user/aggiungiNuovoTesserato/{squadraId}/{giocatoreId}")
+//	public String ScegliNuovoTesserato(@PathVariable("squadraId")Long squadraId,@PathVariable("giocatoreId")Long giocatoreId
+//			,Model model) {
+//		model.addAttribute("userDetails", this.globalController.getUser());
+//		model.addAttribute("giocatore",this.giocatoreService.findById(giocatoreId));
+//		model.addAttribute("squadra", this.squadraService.findById(squadraId));   
+//		return "/user/richiestaConfermaNuovoTesserato.html";
+//	}
 	
 	@GetMapping("/user/confermaNuovoTesserato/{squadraId}/{giocatoreId}")
-	public String aggiungiNuovoTesserato(@PathVariable("squadraId")Long squadraId,@PathVariable("giocatoreId")Long giocatoreId
+	public String aggiungiNuovoTesserato(@PathVariable("squadraId")Long squadraId
+			,@PathVariable("giocatoreId")Long giocatoreId
 			,Model model) {
 		model.addAttribute("userDetails", this.globalController.getUser());
+		
 		Tesserato tesserato=new Tesserato();
 		Giocatore giocatore=this.giocatoreService.findById(giocatoreId);
 		Squadra squadra=this.squadraService.findById(squadraId);
+		
+		tesserato.setNome(giocatore.getNome());
+		tesserato.setCognome(giocatore.getCognome());
 		tesserato.setSquadra(squadra);
 		tesserato.setGiocatore(giocatore);
 		tesserato.setDataInizioTesseramento(new Date());
@@ -66,43 +73,25 @@ public class TesseratoController {
 		giocatore.getTesseramenti().add(tesserato);
 		squadra.getTesserati().add(tesserato);
 		
-		this.giocatoreService.save(giocatore);
-		this.squadraService.save(squadra);
 		
-		return "redirect:/user/scegliGiocatoreComeTesserato.html";
+		this.tesseratoService.save(tesserato);
+		
+		
+		model.addAttribute("giocatori", this.giocatoreService.findAllNotSelected());
+		model.addAttribute("squadra", this.squadraService.findById(squadraId));
+		return "/user/scegliGiocatoreComeTesserato.html";
 	}
 	
 	
 /*-------------------------------------------------------------------------------------------------
  *--------------------------------------------------------------------------------------------------*/
 	
-	@GetMapping("/user/scegliTesseratoDaEliminare/{squadraId}")
-	public String scegliGiocatoreDaEliminare(@PathVariable("squadraId")Long squadraId,Model model) {
-		model.addAttribute("userDetails",this.globalController.getUser());
-		model.addAttribute("giocatori", this.giocatoreService.findAllSelected());
-		model.addAttribute("squadra",this.squadraService.findById(squadraId));
-		return "/user/scegliTesseratoDaEliminare.html";
-	}
-	
-	
-	@GetMapping("/user/scegliTesseratoDaEliminare/{squadraId}/{giocatoreId")
-	public String confermaGiocatoreDaEliminare(@PathVariable("squadraId")Long squadraId
-			,@PathVariable("giocatoreId")Long giocatoreId
+	@GetMapping("/user/eliminaGiocatore/{tesseratoId}")
+	public String eliminaGiocatore(@PathVariable("tesseratoId")Long tesseratoId
 			,Model model) {
-		model.addAttribute("userDetails", this.globalController.getUser());
-		model.addAttribute("giocatore", this.giocatoreService.findById(giocatoreId));
-		model.addAttribute("squadraId", this.squadraService.findById(squadraId));
-		return "/user/confermaTesseratoDaEliminare.html";
-	}
-	
-	
-	@GetMapping("/user/eliminaGiocatore/{squadraId}/{giocatoreId}")
-	public String eliminaGiocatore(@PathVariable("squadraId")Long squadraId
-			,@PathVariable("giocatoreId")Long giocatoreId
-			,Model model) {
-		Tesserato tesserato = this.tesseratoService.findGiocatoreBySquadraToCancel(giocatoreId , squadraId);
-		Giocatore giocatore= this.giocatoreService.findById(giocatoreId);
-		Squadra squadra=this.squadraService.findById(squadraId);
+		Tesserato tesserato = this.tesseratoService.findById(tesseratoId);
+		Giocatore giocatore= tesserato.getGiocatore();
+		Squadra squadra=tesserato.getSquadra();
 		
 		tesserato.setDataFineTesseramento(new Date());
 		
@@ -110,10 +99,15 @@ public class TesseratoController {
 		
 		squadra.getTesserati().remove(tesserato);
 		
+		this.tesseratoService.save(tesserato);  
 		this.giocatoreService.save(giocatore);
 		this.squadraService.save(squadra);
 		
-		return "redirect:/user/scegliTesseratoDaEliminare.html";
+		
+		model.addAttribute("squadra",squadra);
+		model.addAttribute("tesserati",squadra.getTesserati());
+		model.addAttribute("presidente",squadra.getPresidente());
+		return "redirect:/user/squadra.html";
 	}
 
 }

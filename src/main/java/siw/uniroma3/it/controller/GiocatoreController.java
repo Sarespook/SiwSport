@@ -67,7 +67,7 @@ public class GiocatoreController {
                 imageFile.transferTo(imagePath.toFile());
 
                 // Set the URL to the image in the animal entity
-                giocatore.setUrlImage("/images/" + filename); // URL mapped to the dynamic endpoint
+                giocatore.setUrlImage("/GiocatoreImages/" + filename); // URL mapped to the dynamic endpoint
             }
 			
 			giocatoreService.save(giocatore);

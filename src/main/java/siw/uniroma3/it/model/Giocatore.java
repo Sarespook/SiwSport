@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +23,7 @@ public class Giocatore {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	
-	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataDiNascita;
 	
 	@NotBlank
@@ -38,7 +40,7 @@ public class Giocatore {
 	
 	private boolean selezionato=false;
 	
-	@OneToMany()
+	@OneToMany
 	private List<Tesserato> tesseramenti;
 
 	public Long getId() {

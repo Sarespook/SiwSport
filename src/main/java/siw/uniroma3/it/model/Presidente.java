@@ -3,6 +3,9 @@ package siw.uniroma3.it.model;
 import java.util.Date;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +22,15 @@ public class Presidente {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull
+	
 	private String cf;
+	
 	
 	private String urlImage;
 	
 	
-	private Date dataDiNascita;
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // Specifica il formato della data
+    private Date dataDiNascita;
 	
 	
 	private String luogoDiNascita;

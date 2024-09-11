@@ -16,4 +16,16 @@ public class TesseratoService {
 		return this.tesseratoRepository.findGiocatoreBySquadraToCancel(giocatoreId,squadraId);
 	}
 
+	public Iterable<Tesserato> findAllBySquadraId(Long squadraId) {
+		return this.tesseratoRepository.findAllBySquadraId(squadraId);
+	}
+
+	public void save(Tesserato tesserato) {
+		this.tesseratoRepository.save(tesserato);
+	}
+
+	public Tesserato findById(Long tesseratoId) {
+		return this.tesseratoRepository.findById(tesseratoId).get();
+	}
+
 }

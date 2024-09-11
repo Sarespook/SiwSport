@@ -2,6 +2,8 @@ package siw.uniroma3.it.model;
 
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -18,18 +20,18 @@ public class Squadra {
 	@NotBlank
 	private String nome;
 	
-	@NotBlank
+	@NotNull
 	private Long annoFondazione;
 	
 	@NotBlank
-	private Long indirizzoSede;
+	private String indirizzoSede;
 	
 	private String urlLogo;
 	
 	@OneToOne(cascade=CascadeType.PERSIST)
 	private Presidente presidente;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany
 	private List<Tesserato> tesserati;
 
 	public Long getId() {
@@ -56,11 +58,11 @@ public class Squadra {
 		this.annoFondazione = annoFondazione;
 	}
 
-	public Long getIndirizzoSede() {
+	public String getIndirizzoSede() {
 		return indirizzoSede;
 	}
 
-	public void setIndirizzoSede(Long indirizzoSede) {
+	public void setIndirizzoSede(String indirizzoSede) {
 		this.indirizzoSede = indirizzoSede;
 	}
 	

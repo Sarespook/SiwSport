@@ -17,4 +17,11 @@ public interface TesseratoRepository extends CrudRepository<Tesserato, Long> {
 	public Tesserato findGiocatoreBySquadraToCancel(@Param("giocatoreId")Long giocatoreId
 			,@Param("squadraId") Long squadraId);
 
+	
+	
+	@Query(value="SELECT *"
+			+ "FROM tesserato t"
+			+ "WHERE t.squadra_id = :squadraId" , nativeQuery=true)
+	public Iterable<Tesserato> findAllBySquadraId(@Param("squadraId")Long squadraId);
+
 }

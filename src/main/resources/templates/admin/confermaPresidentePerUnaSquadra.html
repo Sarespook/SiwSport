@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Selezione Presidente</title>
+    <link rel="stylesheet" href="/css/admin/confermaPresidente.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Homepage</a>
+        <a href="/login">Login</a>
+        <a href="/squadre">Squadre</a>
+    </div>
+
+    <!-- Contenitore principale -->
+    <div class="main-container">
+        <!-- Informazioni Presidente -->
+        <div class="president-info">
+            <h2>Conferma Selezione Presidente</h2>
+            <p><strong>Nome:</strong><span th:text="${presidente.nome}"></p>
+            <p><strong>Cognome:</strong><span th:text="${presidente.cognome}"></p>
+            <p><strong>Data di Nascita:</strong> <span th:text="${#dates.format(presidente.dataDiNascita, 'dd-MM-yyyy')}"></span></p>
+        </div>
+
+        <!-- Immagine Presidente -->
+        <div class="president-image">
+           <img th:src="${presidente.urlImage}" alt="Immagine Presidente">
+        </div>
+    </div>
+
+    <!-- Pulsanti -->
+	<div class="buttons">
+	       <button><a th:href="@{'/admin/confermaPresidentePerUnaSquadra/'+${presidente.id}}" class="confirm-btn">Conferma</a></button>
+	       <button><a th:href="@{'/admin/scegliPresidentePerUnaSquadra'}" class="cancel-btn">Annulla</a></button>
+	   </div>
+</body>
+</html>
