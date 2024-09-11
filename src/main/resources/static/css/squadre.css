@@ -1,0 +1,95 @@
+/* Stile generale per l'immagine di sfondo */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url;
+    background-size: cover;
+}
+
+/* Navbar in alto con elementi a sinistra */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px; /* Arrotonda solo il bordo inferiore */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 20px; /* Arrotonda gli angoli degli elementi */
+    margin: 0 5px; /* Spazio tra gli elementi */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Contenitore principale per le squadre */
+.squadre-container {
+    padding: 20px;
+}
+
+.squadre-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Singolo elemento squadra */
+.squadra-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-left: 0px;
+    width: calc(100% - 20px);
+    position: relative; /* Necessario per il posizionamento del testo */
+}
+
+.squadra-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 20px; /* Distanza tra nome e logo */
+    position: relative;
+    z-index: 2; /* Per mantenere il testo sopra il fade */
+    mix-blend-mode: difference; /* Contrasto adattivo */
+}
+
+/* Stile per l'icona del logo con bordo arrotondato */
+.squadra-item img {
+    width: 50px; /* Riduci la dimensione del logo */
+    height: 50px; /* Assicura che l'altezza sia uguale alla larghezza */
+    border-radius: 10px; /* Arrotonda i bordi dell'icona del logo */
+    border: 2px solid #fff; /* Aggiungi un bordo bianco per evidenziare il logo */
+    padding: 5px; /* Spazio interno per creare un effetto di cuscinetto */
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); /* Effetto ombra sul logo */
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro dietro l'icona */
+    z-index: 3; /* Il logo rimane sopra tutto */
+}
+
+/* Effetto hover per l'elemento squadra */
+.squadra-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.squadra-item:hover a {
+    color: white; /* Il testo cambia contrasto */
+    transition: color 0.3s ease-in-out;
+}
+
+

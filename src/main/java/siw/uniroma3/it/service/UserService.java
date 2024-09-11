@@ -55,4 +55,12 @@ public class UserService {
         return result;
     }
 
+	public User findByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+	}
+
+	public boolean existsByNameAndSurnameAndEmail(String name, String surname, String email) {
+		return this.userRepository.existsByNameAndSurnameAndEmail(name, surname, email);
+	}
+
 }

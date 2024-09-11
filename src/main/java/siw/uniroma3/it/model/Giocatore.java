@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +23,13 @@ public class Giocatore {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	
-	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataDiNascita;
 	
 	@NotBlank
 	private String luogoDiNascita;
+	
+	private String urlImage;
 	
 	@NotBlank
 	private String nome;
@@ -33,7 +37,10 @@ public class Giocatore {
 	@NotBlank
 	private String cognome;
 	
-	@OneToMany()
+	
+	private boolean selezionato=false;
+	
+	@OneToMany
 	private List<Tesserato> tesseramenti;
 
 	public Long getId() {
@@ -67,7 +74,14 @@ public class Giocatore {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public String getUrlImage() {
+			return urlImage;
+		}
+	
+	public void setUrlImage(String urlImage) {
+			this.urlImage = urlImage;
+		}
+	
 	public String getCognome() {
 		return cognome;
 	}
@@ -102,6 +116,16 @@ public class Giocatore {
 				&& Objects.equals(luogoDiNascita, other.luogoDiNascita) && Objects.equals(nome, other.nome)
 				&& Objects.equals(tesseramenti, other.tesseramenti);
 	}
+
+	public boolean isSelezionato() {
+		return selezionato;
+	}
+
+	public void setSelezionato(boolean selezionato) {
+		this.selezionato = selezionato;
+	}
+
+	
 	
 	
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Presidenti - SiwSport</title>
+    <link rel="stylesheet" href="/css/admin/presidenti.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/squadre">Squadre</a>
+    </div>
+
+    <!-- Contenitore principale per l'elenco dei presidenti -->
+    <div class="presidenti-container">
+        <h2>Elenco Presidenti</h2>
+        <div class="presidenti-list">
+            <!-- Iterazione su tutti i presidenti -->
+            <div class="presidente-item" th:each="presidente : ${presidenti}">
+                <a th:href="@{'/admin/scegliPresidentePerUnaSquadra/' + ${presidente.id}}"><span th:text="${presidente.nome} + ' ' + ${presidente.cognome}"></span></a>
+                <img th:src="${presidente.urlImage}" alt="Immagine Presidente">
+            </div>
+            <!-- Aggiungi altri elementi presidente come richiesto -->
+        </div>
+    </div>
+</body>
+</html>

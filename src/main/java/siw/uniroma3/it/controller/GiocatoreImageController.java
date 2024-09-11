@@ -15,10 +15,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @RestController
-@RequestMapping("/images")
-public class ImageController {
+@RequestMapping("/GiocatoreImages")
+public class GiocatoreImageController {
 	
-	 private final String uploadDir = "C:/Users/hp/Siw_Workspace/SiwSport/images";
+	 private final String uploadDir = "C:/Users/hp/Siw_Workspace/SiwSport/GiocatoreImages";
 	 
 	 @GetMapping("/{filename}")
 	    public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {
@@ -36,5 +36,5 @@ public class ImageController {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	        }
 	    }
-
+	 
 }

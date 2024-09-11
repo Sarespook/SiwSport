@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Squadre - SiwSport</title>
+    <link rel="stylesheet" href="/css/squadre.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/squadre">Squadre</a>
+    </div>
+
+    <!-- Contenitore principale per l'elenco delle squadre -->
+    <div class="squadre-container">
+        <h2>Elenco Squadre</h2>
+        <div class="squadre-list">
+            <!-- Iterazione su tutte le squadre -->
+            <div class="squadra-item" th:each="squadra : ${squadre}">
+                <a th:href="@{'/squadra/'+${squadra.id}}" th:text="${squadra.nome}">Nome Squadra</a>
+                <img th:src="@{${squadra.urlLogo}}" alt="Logo Squadra">
+            </div>
+            <!-- Aggiungi altri elementi squadra come richiesto -->
+        </div>
+    </div>
+</body>
+</html>
+

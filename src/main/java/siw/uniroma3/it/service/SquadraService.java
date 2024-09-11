@@ -20,4 +20,12 @@ public class SquadraService {
 		this.squadraRepository.save(squadra);
 	}
 
+	public boolean existsByNome(String nome) {
+		return this.squadraRepository.existsByNome(nome);
+	}
+
+	public Iterable<Squadra> findAll() {
+		return this.squadraRepository.findAll();
+	}
+
 }

@@ -3,6 +3,8 @@ package siw.uniroma3.it.model;
 import java.util.Date;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +22,17 @@ public class Presidente {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull
+	
 	private String cf;
 	
-	@NotNull
-	private Date dataDiNascita;
 	
-	@NotBlank
+	private String urlImage;
+	
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // Specifica il formato della data
+    private Date dataDiNascita;
+	
+	
 	private String luogoDiNascita;
 	
 	@NotBlank
@@ -35,8 +41,17 @@ public class Presidente {
 	@NotBlank
 	private String cognome;
 	
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne
 	private Squadra squadra;
+	
+
+	public Squadra getSquadra() {
+		return squadra;
+	}
+
+	public void setSquadra(Squadra squadra) {
+		this.squadra = squadra;
+	}
 
 	public Long getId() {
 		return id;
@@ -48,6 +63,15 @@ public class Presidente {
 
 	public String getCf() {
 		return cf;
+	}
+	
+	
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	public void setCf(String cf) {
@@ -104,6 +128,8 @@ public class Presidente {
 				&& Objects.equals(dataDiNascita, other.dataDiNascita)
 				&& Objects.equals(luogoDiNascita, other.luogoDiNascita) && Objects.equals(nome, other.nome);
 	}
+
+	
 
 	
 

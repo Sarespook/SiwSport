@@ -24,16 +24,24 @@ public class GiocatoreService {
 
 	public boolean existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(String Nome
 			,String Cognome
-			,String LuogoDiNascita
-			,Date DataDiNascita) {
+			,Date DataDiNascita
+			,String LuogoDiNascita) {
 		return this.giocatoreRepository.existsByNomeAndCognomeAndDataDiNascitaAndLuogoDiNascita(Nome
 				,Cognome
-				,LuogoDiNascita
-				,DataDiNascita);
+				,DataDiNascita
+				,LuogoDiNascita);
 	}
 
 	public Giocatore findById(Long giocatoreId) {
 		return this.giocatoreRepository.findById(giocatoreId).get();
+	}
+
+	public Iterable<Giocatore> findAllNotSelected() {
+		return this.giocatoreRepository.findAllNotSelected();
+	}
+
+	public Iterable<Giocatore> findAllSelectedBySquadra(Long squadraId) {
+		return this.giocatoreRepository.findAllSelectedBySquadra(squadraId);
 	}
 	
 	

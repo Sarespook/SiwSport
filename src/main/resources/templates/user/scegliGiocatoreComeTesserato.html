@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Giocatori</title>
+	<link rel="stylesheet" href="/css/user/scegliGiocatore.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/squadre">Squadre</a>
+    </div>
+
+    <div class="container">
+        <h2>Lista Giocatori</h2>
+        <div class="players-list" th:each="giocatore : ${giocatori}">
+            <div class="player">
+                <div class="name"><span th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"></span></div>
+                <div class="birth-date"><span th:text="${#dates.format(giocatore.dataDiNascita, 'dd/MM/yyyy')}"></span></div>
+                <div class="image">
+                    <img th:src="@{${giocatore.urlImage}}" alt="Giocatore">
+                </div>
+                <div class="add-btn">
+                    <a th:href="@{'/user/confermaNuovoTesserato/'+${squadra.id}+'/'+${giocatore.id}}">Aggiungi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

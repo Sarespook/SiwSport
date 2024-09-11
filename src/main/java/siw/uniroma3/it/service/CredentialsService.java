@@ -38,4 +38,9 @@ public class CredentialsService {
         return this.credentialsRepository.save(credentials);
     }
 
+	public boolean existsByUsername(String username) {
+		return this.credentialsRepository.existsByUsername(username);
+	}
+
+
 }
