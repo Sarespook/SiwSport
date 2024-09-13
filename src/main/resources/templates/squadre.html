@@ -10,8 +10,14 @@
     <!-- Navbar -->
     <div class="navbar">
         <a href="/">Home</a>
-        <a href="/login">Login</a>
+        <a th:if="${UserDetails == null}" href="/login">Login</a>
+		<a th:if="${UserDetails != null}" href="/logout">Logout</a>
         <a href="/squadre">Squadre</a>
+		
+		<div class="user-info" th:if="${UserDetail}">
+				    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+					<span class="username" th:text="${credentials.username}"></span>
+				</div>
     </div>
 
     <!-- Contenitore principale per l'elenco delle squadre -->

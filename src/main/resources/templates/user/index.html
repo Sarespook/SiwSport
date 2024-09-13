@@ -9,10 +9,15 @@
 <body>
     <div class="navbar">
         <a href="/">Homepage</a>
-        <a href="/login">Login</a>
 		<a href="/logout">Logout</a>
         <a href="/squadre">Squadre</a>
+		
+		<div class="user-info">
+		    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+			<span class="username" th:text="${credentials.username}"></span>
+		</div>
     </div>
+	
     <div class="presidente-container">
         <h1>Benvenuto, Presidente!</h1>
         <div class="presidente-links">

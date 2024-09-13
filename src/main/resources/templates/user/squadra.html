@@ -10,6 +10,11 @@
     <div class="navbar">
         <a href="/">Home</a>
         <a href="/logout">Logout</a>
+		
+		<div class="user-info">
+				    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+					<span class="username" th:text="${credentials.username}"></span>
+				</div>
     </div>
 
     <div class="container">

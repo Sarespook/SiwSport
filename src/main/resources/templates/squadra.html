@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Squadra</title>
+	<link rel="stylesheet" href="/css/squadra.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a th:if="${UserDetails}" href="/logout">Logout</a>
+		<a th:if="${UserDetails == null}" href="/login">Login</a>
+		
+		<div class="user-info" th:if="${UserDetails}">
+						    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+							<span class="username" th:text="${credentials.username}"></span>
+						</div>
+    </div>
+
+    <div class="container">
+        <!-- Team Info Container -->
+        <div class="team-info">
+            <div class="details">
+                <h2 th:text="${squadra.nome}"></h2>
+              	<p>Anno di Fondazione: <span th:text="${squadra.annoFondazione}"></span></p>
+                <p>Presidente: <span th:text="${presidente.nome}+' '+${presidente.cognome}"></span></p>
+                <!-- Aggiungi altre informazioni qui -->
+            </div>
+            <div class="logo">
+                <img th:src="@{${squadra.urlLogo}}" alt="Logo Squadra">
+            </div>
+        </div>
+
+        <!-- Players List Container -->
+        <div class="players-list">
+            <div class="player" th:each="giocatore : ${giocatori}">
+                <div class="name"><span th:text="${giocatore.nome}+' '+${giocatore.cognome}"></span></div>
+				<div class="image">
+				       <img th:src="@{${giocatore.urlImage}}" alt="Giocatore">
+				</div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

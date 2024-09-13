@@ -54,7 +54,9 @@ public class AuthenticationController {
 		}
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-		model.addAttribute("userDetails", userDetails);
+		model.addAttribute("UserDetails", userDetails);
+		model.addAttribute("credentials", credentials);
+		model.addAttribute("presidenteUser", credentials.getUser().getPresidente());
 		if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
     		model.addAttribute("squadra",credentials.getUser().getPresidente().getSquadra());  //potrebbe essere null
 			return "/user/index.html";
@@ -69,17 +71,20 @@ public class AuthenticationController {
     public String defaultAfterLogin(Model model) {
         
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	model.addAttribute("UserDetails", userDetails);
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
-    		model.addAttribute("userDetails", userDetails);
+    		model.addAttribute("credentials", credentials);
+    		model.addAttribute("presidenteUser", credentials.getUser().getPresidente());
     		model.addAttribute("squadra",credentials.getUser().getPresidente().getSquadra());  //e' sicuramente null
             return "/user/index.html";
         }
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-    		model.addAttribute("userDetails", userDetails);
+    		model.addAttribute("credentials", credentials);
+    		model.addAttribute("presidenteUser", credentials.getUser().getPresidente());
             return "/admin/index.html";
         }
-    	model.addAttribute("userDetails", userDetails);
+    	model.addAttribute("UserDetails", userDetails);
         return "index";
         
     }
@@ -139,7 +144,7 @@ public class AuthenticationController {
             credentialsService.saveCredentials(credentials);   //idem sopra
             model.addAttribute("user", user);
           
-            return "registrationSuccessful";
+            return "/login";
         }
         return "register";
     }

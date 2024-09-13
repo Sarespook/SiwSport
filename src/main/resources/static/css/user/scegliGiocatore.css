@@ -27,6 +27,28 @@
             background-color: #ddd;
             color: black;
         }
+        
+        
+        
+        /* User info styling */
+        .user-info {
+            float: right; /* Aligns the user info to the right */
+            display: flex; /* Enables flexbox for better alignment */
+            align-items: center; /* Centers items vertically */
+            margin-right: 20px; /* Adds some space from the right edge */
+        }
+
+        .logo {
+            width: 40px; /* Set the width of the logo */
+            height: 40px; /* Set the height of the logo */
+            border-radius: 50%; /* Makes the logo round */
+            margin-right: 10px; /* Space between logo and username */
+        }
+
+        .username {
+            color: #f2f2f2; /* Matches the color of the navbar links */
+            font-size: 16px; /* Adjusts the font size of the username */
+        }
         .container {
             width: 80%;
             margin: 0 auto;

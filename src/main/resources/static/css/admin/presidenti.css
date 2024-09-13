@@ -1,96 +1,110 @@
-/* Stile generale per l'immagine di sfondo */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
 
-/* Navbar in alto con elementi a sinistra */
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    padding: 10px 0;
-    border-radius: 0 0 10px 10px; /* Arrotonda solo il bordo inferiore */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            margin: 0 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        
+        /* User info styling */
+        .user-info {
+            float: right; /* Aligns the user info to the right */
+            display: flex; /* Enables flexbox for better alignment */
+            align-items: center; /* Centers items vertically */
+            margin-right: 20px; /* Adds some space from the right edge */
+        }
 
-.navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 20px; /* Arrotonda gli angoli degli elementi */
-    margin: 0 5px; /* Spazio tra gli elementi */
-    transition: background-color 0.3s, color 0.3s;
-}
+        .logo {
+            width: 40px; /* Set the width of the logo */
+            height: 40px; /* Set the height of the logo */
+            border-radius: 50%; /* Makes the logo round */
+            margin-right: 10px; /* Space between logo and username */
+        }
 
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* Contenitore principale per i presidenti */
-.presidenti-container {
-    padding: 20px;
-}
-
-.presidenti-container h2 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Lista dei presidenti */
-.presidenti-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center; /* Centra gli elementi orizzontalmente */
-}
-
-/* Singolo elemento presidente */
-.presidente-item {
-    display: flex;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-width: 600px; /* Imposta una larghezza massima per gli elementi */
-    position: relative; /* Necessario per il posizionamento del testo */
-    text-align: center;
-}
-
-.presidente-item img {
-      width: 50px; /* Riduci la dimensione del logo */
-    height: 50px; /* Assicura che l'altezza sia uguale alla larghezza */
-    border-radius: 10px; /* Arrotonda i bordi dell'icona del logo */
-    border: 2px solid #fff; /* Aggiungi un bordo bianco per evidenziare il logo */
-    padding: 5px; /* Spazio interno per creare un effetto di cuscinetto */
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5); /* Effetto ombra sul logo */
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro dietro l'icona */
-    z-index: 3; /* Il logo rimane sopra tutto */
-}
-
-.presidente-item p {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Effetto hover per l'elemento presidente */
-.presidente-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: background-color 0.3s ease-in-out;
-}
-
-.presidente-item:hover p {
-    color: white; /* Il testo cambia contrasto */
-    transition: color 0.3s ease-in-out;
-}
+        .username {
+            color: #f2f2f2; /* Matches the color of the navbar links */
+            font-size: 16px; /* Adjusts the font size of the username */
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .presidente-list {
+            border-top: 2px solid #ddd;
+            padding-top: 10px;
+        }
+        .presidente {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .presidente:last-child {
+            border-bottom: none;
+        }
+        .presidente .name {
+            flex: 2;
+            text-align: left;
+        }
+        .presidente .birth-date {
+            flex: 1;
+            text-align: center;
+        }
+        .presidente .image {
+            flex: 1;
+            text-align: right;
+        }
+        .presidente .image img {
+    		width: 150px; /* Larghezza aumentata proporzionalmente */
+   			height: 120px; /* Altezza aumentata */
+    		border-radius: 15px;
+    		border: 2px solid #333;
+    		object-fit: cover;
+			}
+            
+        .presidente .add-btn {
+            flex: 1;
+            text-align: right;
+        }
+        .add-btn a {
+            background-color: #333;
+            color: #f2f2f2;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .add-btn a:hover {
+            background-color: #ddd;
+            color: black;
+        }
 

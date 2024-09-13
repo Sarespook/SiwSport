@@ -18,5 +18,10 @@
     "name": "upload.path-Presidente",
     "type": "java.lang.String",
     "description": "A description for 'upload.path-Presidente'"
+  },
+  {
+    "name": "upload.path-Presidente",
+    "type": "java.lang.String",
+    "description": "A description for 'upload.path-Presidente'"
   }
 ]}

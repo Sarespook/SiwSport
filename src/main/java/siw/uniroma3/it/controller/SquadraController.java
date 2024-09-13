@@ -8,6 +8,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
+import siw.uniroma3.it.model.Credentials;
 import siw.uniroma3.it.model.Presidente;
 import siw.uniroma3.it.model.Squadra;
+import siw.uniroma3.it.service.CredentialsService;
+import siw.uniroma3.it.service.GiocatoreService;
 import siw.uniroma3.it.service.PresidenteService;
 import siw.uniroma3.it.service.SquadraService;
 import siw.uniroma3.it.validation.SquadraValidator;
@@ -42,18 +48,37 @@ public class SquadraController {
 	private PresidenteService presidenteService;
 	
 	@Autowired
+	private GiocatoreService giocatoreService;
+	
+	@Autowired
 	private SquadraService squadraService;
+	
+	@Autowired
+	private CredentialsService credentialsService;
 	
 	@GetMapping("/squadra/{squadraId}")
 	public String getSquadra(@PathVariable("squadraId")Long squadraId,Model model) {
-		model.addAttribute("userDetails", this.globalController.getUser());
-		model.addAttribute("squadre",this.squadraService.findById(squadraId));
+		UserDetails userDetails=(UserDetails) this.globalController.getUser();
+		if(userDetails!=null) {
+			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			model.addAttribute("credentials", credentials);
+			model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
+		}
+		model.addAttribute("UserDetails", this.globalController.getUser());
+		Squadra squadra=this.squadraService.findById(squadraId);
+		
+		model.addAttribute("squadra",squadra);
+		model.addAttribute("presidente",squadra.getPresidente());
+		model.addAttribute("giocatori", this.giocatoreService.findAllSelectedBySquadra(squadraId));
 		return "squadra.html";
 	}
 	
 	@GetMapping("/user/squadra/{squadraId}")
 	public String getSquadraPresidente(@PathVariable("squadraId")Long squadraId,Model model) {
-		model.addAttribute("userDetails", this.globalController.getUser());
+		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
+		model.addAttribute("credentials", credentials);
+		model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
+		
 		Squadra squadra = this.squadraService.findById(squadraId);
 		model.addAttribute("squadra",squadra);
 		model.addAttribute("tesserati",squadra.getTesserati());
@@ -63,7 +88,14 @@ public class SquadraController {
 	
 	@GetMapping("/squadre")
 	public String getSquadre(Model model) {
-		model.addAttribute("userDetails", this.globalController.getUser());
+		UserDetails userDetails=(UserDetails) this.globalController.getUser();
+		if(userDetails!=null) {
+			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			model.addAttribute("credentials", credentials);
+			model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
+		}
+		model.addAttribute("UserDetails", this.globalController.getUser());
+		
 		model.addAttribute("squadre",this.squadraService.findAll());
 		return "squadre.html";
 	}
@@ -73,6 +105,10 @@ public class SquadraController {
 	
 	@GetMapping("/admin/formNuovaSquadra/{presidenteId}")
 	public String getFormNuovaSquadra(@PathVariable("presidenteId")Long presidenteId,Model model){
+		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
+		model.addAttribute("credentials", credentials);
+		model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
+		
 		model.addAttribute("userDetails", this.globalController.getUser());
 		model.addAttribute("squadra", new Squadra());
 		model.addAttribute("presidente", this.presidenteService.findById(presidenteId));
@@ -85,6 +121,10 @@ public class SquadraController {
 			,BindingResult squadraBindingResult
 			,@RequestParam("image") MultipartFile imageFile
 			,Model model)throws IOException {
+		
+		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
+		model.addAttribute("credentials", credentials);
+		model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
 		
 		this.squadraValidator.validate(squadra, squadraBindingResult);
 		

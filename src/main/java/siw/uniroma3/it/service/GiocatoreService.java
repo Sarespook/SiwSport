@@ -44,7 +44,5 @@ public class GiocatoreService {
 		return this.giocatoreRepository.findAllSelectedBySquadra(squadraId);
 	}
 	
-	
-	
 
 }
