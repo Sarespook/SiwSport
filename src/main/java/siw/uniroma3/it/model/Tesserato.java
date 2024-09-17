@@ -13,11 +13,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(uniqueConstraints= {@UniqueConstraint(columnNames= {"giocatore_id","dataInizioTesseramento","dataFineTesseramento"})})
+@Table(uniqueConstraints= {@UniqueConstraint(columnNames= {"giocatore_id","squadra_id","dataInizioTesseramento"})})
 public class Tesserato {
 	
 	@Id
@@ -30,10 +32,11 @@ public class Tesserato {
 	@NotBlank
 	private String cognome;
 
-
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataInizioTesseramento;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataFineTesseramento;
 	

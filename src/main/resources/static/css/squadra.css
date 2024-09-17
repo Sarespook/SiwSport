@@ -90,10 +90,12 @@ body {
         .player:last-child {
             border-bottom: none;
         }
+        
         .player .name {
             flex: 2;
         }
-        .player .date {
+        
+        .player .role {
             flex: 1;
             text-align: center;
         }

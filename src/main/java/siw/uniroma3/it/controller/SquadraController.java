@@ -117,8 +117,8 @@ public class SquadraController {
 	
 	@PostMapping("/squadra/{presidenteId}")
 	public String nuovaSquadra(@Valid@ModelAttribute("squadra")Squadra squadra
-			,@PathVariable("presidenteId")Long presidenteId
 			,BindingResult squadraBindingResult
+			,@PathVariable("presidenteId")Long presidenteId
 			,@RequestParam("image") MultipartFile imageFile
 			,Model model)throws IOException {
 		
@@ -151,10 +151,13 @@ public class SquadraController {
 			
 			
 			model.addAttribute("squadra",squadra);
-			return "/admin/riepilogoInserimentoSquadra.html";
+			model.addAttribute("presidente",squadra.getPresidente());
+			model.addAttribute("giocatori", this.giocatoreService.findAllSelectedBySquadra(squadra.getId()));
+			model.addAttribute("UserDetails", this.globalController.getUser());
+			return "redirect:/squadra/"+squadra.getId();
 		}
 		else {
-			return "redirect:/admin/formNuovaSquadra";
+			return "redirect:/admin/formNuovaSquadra/"+presidenteId;
 		}
 	}
 

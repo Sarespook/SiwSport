@@ -10,7 +10,6 @@
 
     <div class="navbar">
         <a href="/">Home</a>
-        <a href="/squadre">Squadre</a>
         <a href="/login">Login</a>
     </div>
 
@@ -21,47 +20,47 @@
             <!-- Campo Nome -->
             <div class="input-group">
                 <label for="name">Nome:</label>
-                <input id="name" name="user.name" type="text" placeholder="Nome" required th:field="${user.name}" />
+                <input id="name" name="user.name" type="text" placeholder="Nome" th:field="${user.name}" />
                 <span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}" class="error-message"></span>
             </div>
 
             <!-- Campo Cognome -->
             <div class="input-group">
                 <label for="surname">Cognome:</label>
-                <input id="surname" name="user.surname" type="text" placeholder="Cognome" required th:field="${user.surname}" />
+                <input id="surname" name="user.surname" type="text" placeholder="Cognome" th:field="${user.surname}" />
                 <span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}" class="error-message"></span>
             </div>
 
             <!-- Campo Nome Utente -->
             <div class="input-group">
                 <label for="username">Nome Utente:</label>
-                <input id="username" name="credentials.username" type="text" placeholder="Nome Utente" required th:field="${credentials.username}" />
+                <input id="username" name="credentials.username" type="text" placeholder="Nome Utente" th:field="${credentials.username}" />
                 <span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}" class="error-message"></span>
             </div>
 
             <!-- Campo Password -->
             <div class="input-group">
                 <label for="password">Password:</label>
-                <input id="password" name="credentials.password" type="password" placeholder="Password" required th:field="${credentials.password}" />
+                <input id="password" name="credentials.password" type="password" placeholder="Password" th:field="${credentials.password}" />
                 <span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}" class="error-message"></span>
             </div>
 			
 			<!-- Campo Email-->
 			            <div class="input-group">
 			                <label for="email">Email:</label>
-			                <input id="email" name="user.email" type="email" placeholder="Email" required th:field="${user.email}" />
+			                <input id="email" name="user.email" type="email" placeholder="Email" th:field="${user.email}" />
 			                <span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" class="error-message"></span>
 			            </div>
 						
 			<div class="input-group">
 				<label for="dataDiNascita">Luogo di Nascita:</label>
-				<input id="dataDiNascita" name="presidente.dataDiNascita" type="date" required th:field="${presidente.dataDiNascita}" />
+				<input id="dataDiNascita" name="presidente.dataDiNascita" type="date"  th:field="${presidente.dataDiNascita}" />
 				<span th:if="${#fields.hasErrors('presidente.dataDiNascita')}" th:errors="${presidente.dataDiNascita}" class="error-message"></span>
 			</div>
 						
 			<div class="input-group">
 			    <label for="luogoDiNascita">Luogo di Nascita:</label>
-				<input id="luogoDiNascita" name="presidente.luogoDiNascita" type="text" placeholder="Luogo" required th:field="${presidente.luogoDiNascita}" />
+				<input id="luogoDiNascita" name="presidente.luogoDiNascita" type="text" placeholder="Luogo"  th:field="${presidente.luogoDiNascita}" />
 			    <span th:if="${#fields.hasErrors('presidente.luogoDiNascita')}" th:errors="${presidente.luogoDiNascita}" class="error-message"></span>
 			</div>
 						

@@ -10,13 +10,12 @@
     <div class="navbar">
         <a href="/">Homepage</a>
         <a href="/login">Login</a>
-		<a href="/logout">Logout</a>
     </div>
     <div class="container">
         <h1>Benvenuto!</h1>
         <div class="guest-links">
-            <div class="link-item" th:if="${squadra!=null}">
-                <a th:href="@{/squadre}">Visiona Squadre</a>
+            <div class="link-item">
+                <a href="/squadre">Visiona Squadre</a>
             </div>
         </div>
     </div>

@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -21,11 +23,16 @@ public class Giocatore {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataDiNascita;
 	
 	@NotBlank
 	private String luogoDiNascita;
+	
+	@NotBlank
+	private String ruolo;
+	
 	
 	private String urlImage;
 	
@@ -87,7 +94,15 @@ public class Giocatore {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+	
+	public String getRuolo() {
+		return ruolo;
+	}
 
+	public void setRuolo(String ruolo) {
+		this.ruolo = ruolo;
+	}
+	
 	public List<Tesserato> getTesseramenti() {
 		return tesseramenti;
 	}

@@ -25,6 +25,8 @@ import siw.uniroma3.it.model.Presidente;
 import siw.uniroma3.it.model.Credentials;
 import siw.uniroma3.it.model.User;
 import siw.uniroma3.it.service.CredentialsService;
+import siw.uniroma3.it.validation.CredentialsValidator;
+import siw.uniroma3.it.validation.UserValidator;
 import jakarta.validation.Valid;
 
 @Controller
@@ -36,6 +38,12 @@ public class AuthenticationController {
 	@Autowired
 	private CredentialsService credentialsService;
 
+	
+	@Autowired
+	private CredentialsValidator credentialsValidator;
+	
+	@Autowired
+	private UserValidator userValidator;
 	
 	
 
@@ -116,10 +124,12 @@ public class AuthenticationController {
                  ,@RequestParam("image") MultipartFile imageFile
                  ,Model model)throws IOException {
 		
+		userValidator.validate(user, userBindingResult);
+		credentialsValidator.validate(credentials, credentialsBindingResult);
 		
 
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!credentialsBindingResult.hasErrors() && !presidenteBindingResult.hasErrors()) { 
+        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
         	
         	if (!imageFile.isEmpty()) {
             	
@@ -144,7 +154,7 @@ public class AuthenticationController {
             credentialsService.saveCredentials(credentials);   //idem sopra
             model.addAttribute("user", user);
           
-            return "/login";
+            return "registrationSuccessful.html";
         }
         return "register";
     }

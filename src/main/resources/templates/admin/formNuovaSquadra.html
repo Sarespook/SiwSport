@@ -11,7 +11,6 @@
     <div class="navbar">
         <a href="/">Homepage</a>
         <a href="/logout">Logout</a>
-        <a href="/squadre">Squadre</a>
 		
     </div>
 
@@ -39,14 +38,14 @@
             <!-- Campo Nome Squadra -->
             <div class="input-group">
                 <label for="nome">Nome Squadra:</label>
-                <input id="nome" name="squadra.nome" type="text" placeholder="Nome Squadra" required th:field="${squadra.nome}" />
+                <input id="nome" name="squadra.nome" type="text" placeholder="Nome Squadra" th:field="${squadra.nome}" />
                 <span th:if="${#fields.hasErrors('squadra.nome')}" th:errors="${squadra.nome}" class="error-message"></span>
             </div>
 
             <!-- Campo Anno di Fondazione -->
             <div class="input-group">
                 <label for="annoFondazione">Anno di Fondazione:</label>
-                <input id="annoFondazione" name="squadra.annoFondazione" type="number" placeholder="Anno di Fondazione" required th:field="${squadra.annoFondazione}" />
+                <input id="annoFondazione" name="squadra.annoFondazione" type="number" placeholder="Anno di Fondazione"  th:field="${squadra.annoFondazione}" />
                 <span th:if="${#fields.hasErrors('squadra.annoFondazione')}" th:errors="${squadra.annoFondazione}" class="error-message"></span>
             </div>
 
@@ -54,7 +53,7 @@
 			<!-- Campo indirizzo della Sede -->
 			 <div class="input-group">
 			     <label for="indirizzoSede">Inidrizzo della sede:</label>
-			     <input id="indirizzoSede" name="squadra.indirizzoSede" type="text" placeholder="Indirizzo" required th:field="${squadra.indirizzoSede}" />
+			     <input id="indirizzoSede" name="squadra.indirizzoSede" type="text" placeholder="Indirizzo" th:field="${squadra.indirizzoSede}" />
 			     <span th:if="${#fields.hasErrors('squadra.indirizzoSede')}" th:errors="${squadra.indirizzoSede}" class="error-message"></span>
 			 </div>
 

@@ -11,7 +11,6 @@
     <div class="navbar">
         <a href="/">Homepage</a>
 		<a href="/logout">Logout</a>
-        <a href="/squadre">Squadre</a>
 		
     </div>
 
@@ -22,26 +21,33 @@
           
             <div class="input-group">
                 <label for="nome">Nome:</label>
-                <input id="nome" name="giocatore.nome" type="text" placeholder="Nome Giocatore" required th:field="${giocatore.nome}" />
+                <input id="nome" name="giocatore.nome" type="text" placeholder="Nome Giocatore" th:field="${giocatore.nome}" />
                 <span th:if="${#fields.hasErrors('giocatore.nome')}" th:errors="${giocatore.nome}" class="error-message"></span>
             </div>
 			
 			<div class="input-group">
 				<label for="cognome">Cognome:</label>
-				<input id="cognome" name="giocatore.cognome" type="text" placeholder="Cognome Giocatore" required th:field="${giocatore.cognome}" />
+				<input id="cognome" name="giocatore.cognome" type="text" placeholder="Cognome Giocatore" th:field="${giocatore.cognome}" />
 				<span th:if="${#fields.hasErrors('giocatore.cognome')}" th:errors="${giocatore.cognome}" class="error-message"></span>
 			</div>
+			
+			<div class="input-group">
+				<label for="ruolo">Ruolo:</label>
+				<input id="ruolo" name="giocatore.ruolo" type="text" placeholder="Ruolo Giocatore" th:field="${giocatore.ruolo}" />
+				<span th:if="${#fields.hasErrors('giocatore.ruolo')}" th:errors="${giocatore.ruolo}" class="error-message"></span>
+			</div>
+			
 
             <div class="input-group">
                 <label for="dataDiNascita">Data di nascita:</label>
-                <input id="dataDiNascita" name="giocatore.dataDiNascita" type="date" placeholder="Data di Nascita" required th:field="${giocatore.dataDiNascita}" />
+                <input id="dataDiNascita" name="giocatore.dataDiNascita" type="date" placeholder="Data di Nascita" th:field="${giocatore.dataDiNascita}" />
                 <span th:if="${#fields.hasErrors('giocatore.dataDiNascita')}" th:errors="${giocatore.dataDiNascita}" class="error-message"></span>
             </div>
 
 			
 			<div class="input-group">
 				<label for="luogoDiNascita">Luogo di Nacita:</label>
-				<input id="luogoDiNascita" name="giocatore.luogoDiNascita" type="text" placeholder="luogoDiNascita" required th:field="${giocatore.luogoDiNascita}" />
+				<input id="luogoDiNascita" name="giocatore.luogoDiNascita" type="text" placeholder="luogoDiNascita" th:field="${giocatore.luogoDiNascita}" />
 				<span th:if="${#fields.hasErrors('giocatore.luogoDiNascita')}" th:errors="${giocatore.luogoDiNascita}" class="error-message"></span>
 			</div>
 						

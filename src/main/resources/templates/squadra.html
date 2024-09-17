@@ -36,6 +36,7 @@
         <div class="players-list">
             <div class="player" th:each="giocatore : ${giocatori}">
                 <div class="name"><span th:text="${giocatore.nome}+' '+${giocatore.cognome}"></span></div>
+				<div class="role"><span th:text="${giocatore.ruolo}"></span></div>
 				<div class="image">
 				       <img th:src="@{${giocatore.urlImage}}" alt="Giocatore">
 				</div>

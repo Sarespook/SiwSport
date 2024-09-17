@@ -52,7 +52,6 @@ public class GiocatoreController {
 		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
 		model.addAttribute("credentials", credentials);
 		model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
-		
 		model.addAttribute("giocatore",new Giocatore());
 		return "/admin/formNuovoGiocatore.html";
 	}
@@ -60,8 +59,9 @@ public class GiocatoreController {
 	
 	@PostMapping("/admin/giocatore")
 	public String nuovoGiocatore(@Valid@ModelAttribute ("giocatore")Giocatore giocatore
+			,BindingResult giocatoreBindingResult
 			,@RequestParam("image") MultipartFile imageFile
-			,BindingResult giocatoreBindingResult,Model model) throws IOException {
+			,Model model) throws IOException {
 		
 		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
 		model.addAttribute("credentials", credentials);
@@ -69,7 +69,7 @@ public class GiocatoreController {
 		
 		this.giocatoreValidator.validate(giocatore,giocatoreBindingResult);
 		
-		if(giocatoreBindingResult.hasErrors()==false) {
+		if(!giocatoreBindingResult.hasErrors()) {
 			
 			if (!imageFile.isEmpty()) {
             	
@@ -89,7 +89,7 @@ public class GiocatoreController {
 		}
 		
 		else {
-			return "/admin/formNuovoGiocatore";
+			return "redirect:/admin/formNuovoGiocatore";
 		}
 		
 		

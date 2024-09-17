@@ -19,8 +19,9 @@ public interface GiocatoreRepository extends CrudRepository<Giocatore, Long> {
 	        + "FROM giocatore g "
 	        + "WHERE g.selezionato IS FALSE ", nativeQuery=true)
 	public Iterable<Giocatore> findAllNotSelected();
-
-	@Query(value="SELECT g.selezionato,g.data_di_nascita,g.id,g.cognome,g.luogo_di_nascita,g.nome,g.url_image "
+	
+	/*superfluo ma funzionante*/
+	@Query(value="SELECT g.selezionato,g.data_di_nascita,g.id,g.cognome,g.luogo_di_nascita,g.nome,g.ruolo,g.url_image "
 	        + "FROM (giocatore_tesseramenti gt JOIN squadra_tesserati st ON "
 	        + "gt.tesseramenti_id=st.tesserati_id ) JOIN giocatore g ON "
 	        + "g.id=gt.giocatore_id "
