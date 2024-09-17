@@ -5,14 +5,14 @@ import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Presidente {
@@ -28,11 +28,11 @@ public class Presidente {
 	
 	private String urlImage;
 	
-	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // Specifica il formato della data
     private Date dataDiNascita;
 	
-	
+	@NotBlank
 	private String luogoDiNascita;
 	
 	@NotBlank

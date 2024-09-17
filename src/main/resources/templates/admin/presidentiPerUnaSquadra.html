@@ -10,21 +10,29 @@
     <!-- Navbar -->
     <div class="navbar">
         <a href="/">Home</a>
-        <a href="/login">Login</a>
-        <a href="/squadre">Squadre</a>
+        <a href="/logout">Logout</a>
+		
+		<div class="user-info">
+				    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+					<span class="username" th:text="${credentials.username}"></span>
+				</div>
     </div>
-
-    <!-- Contenitore principale per l'elenco dei presidenti -->
-    <div class="presidenti-container">
-        <h2>Elenco Presidenti</h2>
-        <div class="presidenti-list">
-            <!-- Iterazione su tutti i presidenti -->
-            <div class="presidente-item" th:each="presidente : ${presidenti}">
-                <a th:href="@{'/admin/scegliPresidentePerUnaSquadra/' + ${presidente.id}}"><span th:text="${presidente.nome} + ' ' + ${presidente.cognome}"></span></a>
-                <img th:src="${presidente.urlImage}" alt="Immagine Presidente">
-            </div>
-            <!-- Aggiungi altri elementi presidente come richiesto -->
-        </div>
-    </div>
+	
+	<div class="container">
+	        <h2>Elenco Presidenti</h2>
+	        <div class="presidente-list" th:each="presidente : ${presidenti}">
+	            <div class="presidente">
+	                <div class="name"><span th:text="${presidente.nome} + ' ' + ${presidente.cognome}"></span></div>
+	                <div class="birth-date"><span th:text="${#dates.format(presidente.dataDiNascita, 'dd/MM/yyyy')}"></span></div>
+	                <div class="image">
+	                    <img th:src="@{${presidente.urlImage}}" alt="Presidente">
+	                </div>
+	                <div class="add-btn">
+	                    <a th:href="@{'/admin/scegliPresidentePerUnaSquadra/' + ${presidente.id}}">Aggiungi</a>
+	                </div>
+	            </div>
+	        </div>
+	</div>
+	
 </body>
 </html>

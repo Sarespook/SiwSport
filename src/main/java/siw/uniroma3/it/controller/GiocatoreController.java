@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.Valid;
 import siw.uniroma3.it.model.Credentials;
 import siw.uniroma3.it.model.Giocatore;
+import siw.uniroma3.it.service.CredentialsService;
 import siw.uniroma3.it.service.GiocatoreService;
 import siw.uniroma3.it.validation.GiocatoreValidator;
 
@@ -39,24 +40,36 @@ public class GiocatoreController {
 
 	@Autowired
 	private GiocatoreValidator giocatoreValidator;
+
+
+	@Autowired
+	private CredentialsService credentialsService;
 	
 	
 	
 	@GetMapping("/admin/formNuovoGiocatore")
 	public String getFormNuovoGiocatore(Model model) {
-		model.addAttribute("userDetails",this.globalController.getUser());
+		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
+		model.addAttribute("credentials", credentials);
+		model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
 		model.addAttribute("giocatore",new Giocatore());
 		return "/admin/formNuovoGiocatore.html";
 	}
 	
+	
 	@PostMapping("/admin/giocatore")
 	public String nuovoGiocatore(@Valid@ModelAttribute ("giocatore")Giocatore giocatore
+			,BindingResult giocatoreBindingResult
 			,@RequestParam("image") MultipartFile imageFile
-			,BindingResult giocatoreBindingResult) throws IOException {
+			,Model model) throws IOException {
+		
+		Credentials credentials = credentialsService.getCredentials(((UserDetails) this.globalController.getUser()).getUsername());
+		model.addAttribute("credentials", credentials);
+		model.addAttribute("presidenteUser",credentials.getUser().getPresidente());
 		
 		this.giocatoreValidator.validate(giocatore,giocatoreBindingResult);
 		
-		if(giocatoreBindingResult.hasErrors()==false) {
+		if(!giocatoreBindingResult.hasErrors()) {
 			
 			if (!imageFile.isEmpty()) {
             	
@@ -71,8 +84,10 @@ public class GiocatoreController {
             }
 			
 			giocatoreService.save(giocatore);
-			return "redirect:/admin/index";
+			
+			return "/admin/index";
 		}
+		
 		else {
 			return "redirect:/admin/formNuovoGiocatore";
 		}

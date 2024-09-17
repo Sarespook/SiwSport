@@ -10,8 +10,12 @@
     <!-- Navbar -->
     <div class="navbar">
         <a href="/">Homepage</a>
-        <a href="/login">Login</a>
-        <a href="/squadre">Squadre</a>
+        <a href="/logout">Logout</a>
+		
+		<div class="user-info">
+				    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+					<span class="username" th:text="${credentials.username}"></span>
+				</div>
     </div>
 
     <!-- Contenitore principale -->

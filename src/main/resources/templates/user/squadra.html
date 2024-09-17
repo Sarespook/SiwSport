@@ -10,6 +10,11 @@
     <div class="navbar">
         <a href="/">Home</a>
         <a href="/logout">Logout</a>
+		
+		<div class="user-info">
+				    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+					<span class="username" th:text="${credentials.username}"></span>
+				</div>
     </div>
 
     <div class="container">
@@ -31,6 +36,7 @@
             <div class="player" th:each="tesserato : ${tesserati}">
                 <div class="name"><span th:text="${tesserato.nome}+' '+${tesserato.cognome}"></span></div>
                 <div class="date"><span th:text="${#dates.format(tesserato.dataInizioTesseramento, 'dd/MM/yyyy')}"></span></div>
+				<div class="role"><span th:text="${tesserato.giocatore.ruolo}"></span></div>
                 <div class="actions">
                     <a th:href="@{'/user/eliminaGiocatore/'+${tesserato.id}}">Rimuovi</a>
                 </div>

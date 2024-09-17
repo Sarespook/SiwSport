@@ -27,5 +27,6 @@ public class SquadraService {
 	public Iterable<Squadra> findAll() {
 		return this.squadraRepository.findAll();
 	}
+	
 
 }

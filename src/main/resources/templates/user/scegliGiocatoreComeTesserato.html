@@ -9,7 +9,13 @@
 <body>
     <div class="navbar">
         <a href="/">Home</a>
-        <a href="/squadre">Squadre</a>
+		<a href="/logout">Logout</a>
+		
+
+		<div class="user-info">
+		    <img th:src="@{${presidenteUser.urlImage}}" alt="Logo" class="logo">
+			<span class="username" th:text="${credentials.username}"></span>
+		</div>
     </div>
 
     <div class="container">
@@ -18,6 +24,7 @@
             <div class="player">
                 <div class="name"><span th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"></span></div>
                 <div class="birth-date"><span th:text="${#dates.format(giocatore.dataDiNascita, 'dd/MM/yyyy')}"></span></div>
+				<div class="role"><span th:text="${giocatore.ruolo}"></span></div>
                 <div class="image">
                     <img th:src="@{${giocatore.urlImage}}" alt="Giocatore">
                 </div>

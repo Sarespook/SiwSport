@@ -33,28 +33,8 @@ body {
     color: black;
 }
 
-/* User info styling */
-        .user-info {
-            float: right; /* Aligns the user info to the right */
-            display: flex; /* Enables flexbox for better alignment */
-            align-items: center; /* Centers items vertically */
-            margin-right: 20px; /* Adds some space from the right edge */
-        }
-
-        .logo {
-            width: 40px; /* Set the width of the logo */
-            height: 40px; /* Set the height of the logo */
-            border-radius: 50%; /* Makes the logo round */
-            margin-right: 10px; /* Space between logo and username */
-        }
-
-        .username {
-            color: #f2f2f2; /* Matches the color of the navbar links */
-            font-size: 16px; /* Adjusts the font size of the username */
-        }
-
-/* Container principale per l'amministratore */
-.admin-container {
+/* Container principale */
+.container {
     width: 60%;
     margin: 0 auto;
     padding: 20px;
@@ -67,8 +47,8 @@ h1 {
     text-align: center;
 }
 
-/* Link dell'amministratore a sinistra */
-.admin-links {
+/* Link a sinistra */
+.guest-links {
     margin: 20px 0;
 }
 
@@ -88,5 +68,3 @@ h1 {
 .link-item a:hover {
     color: #2980b9;
 }
-
-
